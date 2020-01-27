@@ -1,16 +1,49 @@
-console.log("Hello World");
+(function() {
+  var itemClassName = "slider__photo";
+  (items = document.getElementsByClassName(itemClassName)),
+    (totalItems = items.length),
+    (slide = 0);
 
-var a = 1;
-var b = 2;
+  // Set event listeners
+  function setEventListeners() {
+    var next = document.getElementsByClassName("slider__button--next")[0],
+      prev = document.getElementsByClassName("slider__button--prev")[0];
 
-if (a < b) {
-    console.log("a is lesser than b");
-} else {
-    console.log("a is greater than b");
-}
-    
-if (a === 1) {
-console.log("a is exactly 1")
-}
+    next.addEventListener("click", getNext);
+    prev.addEventListener("click", getPrev);
+  }
 
+  function getNext() {
+    items[slide].classList.remove("active");
+    if (slide === totalItems - 1) {
+      slide = 0;
+    } else {
+      slide++;
+    }
+    items[slide].classList.add("active");
+  }
+  // TODO
 
+  function getPrev() {
+    items[slide].classList.remove("active");
+    if (slide === 0) {
+      slide = totalItems - 1;
+    } else {
+      slide--;
+    }
+
+    items[slide].classList.add("active");
+
+    // TODO
+  }
+
+  function initSlider() {
+    // setInitialClasses();
+    setEventListeners();
+
+    // Set moving to false so that the slider becomes interactive
+    moving = false;
+  }
+
+  initSlider();
+})();
